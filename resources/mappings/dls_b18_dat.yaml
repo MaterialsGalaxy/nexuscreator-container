@@ -1,0 +1,36 @@
+starts_with:
+  path: /entry/metadata/general_nexus_output_file
+  value: /dls/b18
+extra_columns:
+  - name: irefer
+    path: /entry/metadata/diamond_iref
+  - name: mutrans
+    path: /entry/metadata/diamond_lni0it
+  - name: lnitiref
+    path: /entry/metadata/diamond_lnitiref
+  - name: time
+    path: /entry/metadata/diamond_time
+fields:
+  Facility.name: Diamond Light Source
+  Facility.energy:
+    paths: [/entry/instrument/source/energy]
+  Facility.current:
+    paths: [/entry/instrument/source/current]
+  Beamline.name:
+    paths: [/entry/instrument/source/name]
+  Beamline.focusing:
+    paths: [/entry/metadata/general_mirror_2]
+  Beamline.harmonic_rejection:
+    paths: [/entry/metadata/general_hr_mirror]
+  Mono.name:
+    paths: [/entry/metadata/general_crystal_cut]
+  Detector.i0:
+    paths: [/entry/metadata/general_i0_stanford_sensitivity]
+  Detector.it:
+    paths: [/entry/metadata/general_it_stanford_sensitivity]
+  Detector.ir:
+    paths: [/entry/metadata/general_iref_stanford_sensitivity]
+  Sample.name:
+    paths: [/entry/sample/name]
+  Sample.description:
+    paths: [/entry/sample/description]

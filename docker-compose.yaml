@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  format:
+    container_name: nexuscreator_format_container
+    build:
+      context: .
+      target: dev
+    volumes:
+      - type: bind
+        source: ./nexuscreator_container
+        target: /app/nexuscreator_container
+    command: black nexuscreator_container tests
+
+  lint:
+    container_name: nexuscreator_lint_container
+    build:
+      context: .
+      target: dev
+    volumes:
+      - type: bind
+        source: ./nexuscreator_container
+        target: /app/nexuscreator_container
+    command: flake8 nexuscreator_container tests
+
+  safety:
+    container_name: nexuscreator_safety_container
+    build:
+      context: .
+      target: dev
+    command: safety check --full-report
+
+  tests:
+    container_name: nexuscreator_test_container
+    build:
+      context: .
+      target: dev
+    volumes:
+      - type: bind
+        source: ./nexuscreator_container
+        target: /app/nexuscreator_container
+      - type: bind
+        source: ./tests
+        target: /app/tests
+      - type: bind
+        source: ./coverage.xml
+        target: /app/coverage.xml

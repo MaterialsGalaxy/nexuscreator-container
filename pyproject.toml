@@ -1,0 +1,31 @@
+[project]
+name = "nexuscreator-container"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Patrick Austin",email = "patrick.austin@stfc.ac.uk"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "nexuscreator @ git+https://codebase.helmholtz.cloud/hzb/research_data_management/nexuscreator.git@c480dbfb8d892f08feef1494a77f0a92ff2dea60",
+    "h5py (>=3.16.0,<4.0.0)",
+    "pydantic (>=2.13.3,<3.0.0)"
+]
+
+[project.scripts]
+nxxas_to_xdi = "nexuscreator_container.main:main"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "^26.1.0"
+flake8 = "^7.3.0"
+safety = "3.7.0"
+pytest = "^9.0.2"
+pytest-cov = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

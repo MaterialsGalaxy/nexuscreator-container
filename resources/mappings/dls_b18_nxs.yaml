@@ -1,0 +1,56 @@
+starts_with:
+  path: /entry/metadata/nexus_entry1_before_scan_xmlFolderName
+  value: /dls/b18
+extra_columns:
+  - name: irefer
+    path: /entry/metadata/diamond_iref
+  - name: mutrans
+    path: /entry/metadata/diamond_lni0it
+  - name: lnitiref
+    path: /entry/metadata/diamond_lnitiref
+  - name: time
+    path: /entry/metadata/diamond_time
+fields:
+  Facility.name:
+    paths: [/entry/instrument/source/name]
+  Facility.energy:
+    paths: [/entry/instrument/source/energy]
+  Facility.current:
+    paths: [/entry/instrument/source/current]
+  Beamline.name:
+    paths: [/entry/instrument/name]
+  Beamline.focusing:
+    format_str: "bend={} pitch={} y={} y1={} y2={} yaw={}"
+    paths:
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2b
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2pitch
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2y
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2y1
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2y2
+      - /entry/metadata/nexus_entry1_instrument_Mirror2_m2yaw
+  Beamline.harmonic_rejection:
+    format_str: "coating={} inout={} pitch={} y={} y1={} y2={}"
+    paths:
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hr_coating
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hr_inout
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hrpitch
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hry
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hry1
+      - /entry/metadata/nexus_entry1_instrument_HRMirror_hry2
+  Mono.name:
+    paths: [/entry/metadata/nexus_entry1_instrument_DoubleCrystal_dcm_crystal]
+  Detector.i0:
+    format_str: "{} offsets={}"
+    paths:
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_i0_stanford_sensitivity
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_i0_stanford_offset
+  Detector.it:
+    format_str: "{} offsets={}"
+    paths:
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_it_stanford_sensitivity
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_it_stanford_offset
+  Detector.ir:
+    format_str: "{} offsets={}"
+    paths:
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_iref_stanford_sensitivity
+      - /entry/metadata/nexus_entry1_instrument_StanfordAmplifiers_iref_stanford_offset

@@ -1,0 +1,66 @@
+@default = entry
+entry:
+	@NX_class = NXentry
+	@default = data
+	definition:NX_CHAR = "NXxas"
+	title:NX_CHAR = "general_sample_name"
+	instrument:
+		@NX_class = NXinstrument
+		source:
+			@NX_class = NXsource
+			probe:NX_CHAR = "x-ray"
+			name:NX_CHAR = "general_instrument"
+			energy:NX_FLOAT64 = "general_ring_energy"
+				@units = "GeV"
+			current:NX_FLOAT64 = "general_ring_current_start"
+				@units = "mA"
+		monochromator:
+			@NX_class = NXmonochromator
+			energy:NX_FLOAT64[] = diamond_qexafs_energy
+		incoming_beam:
+			@NX_class = NXdetector
+			data:NX_FLOAT64[] = diamond_i0
+		absorbed_beam:
+			@NX_class = NXdetector
+			data:NX_FLOAT64[] = diamond_it
+	sample:
+		@NX_class = NXsample
+		name:NX_CHAR = "general_sample_name"
+		description:NX_CHAR = "general_sample_description"
+	monitor:
+		@NX_class = NXmonitor
+		mode:NX_CHAR = "timer"
+		data:NX_FLOAT64[] = diamond_i0
+	data:
+		@NX_class = NXdata
+		@signal = absorbed_beam
+		@axes = energy
+		energy: --> /entry/instrument/monochromator/energy
+		absorbed_beam: --> /entry/instrument/absorbed_beam/data
+		incoming_beam: --> /entry/instrument/incoming_beam/data
+		mode:NX_CHAR = "Transmission"
+	metadata:
+		@NX_class = NXcollection
+		general_primary_slits:NX_CHAR = "general_primary_slits"
+		general_secondary_slits:NX_CHAR = "general_secondary_slits"
+		general_oh_mirror_coating:NX_CHAR = "general_oh_mirror_coating"
+		general_white_beam_filter:NX_CHAR = "general_white_beam_filter"
+		general_crystal_cut:NX_CHAR = "general_crystal_cut"
+		general_postdcm_slits:NX_CHAR = "general_postdcm_slits"
+		general_experimental_slits:NX_CHAR = "general_experimental_slits"
+		general_hr_mirror:NX_CHAR = "general_hr_mirror"
+		general_mirror_2:NX_CHAR = "general_mirror_2"
+		general_i0_stanford_sensitivity:NX_CHAR = "general_i0_stanford_sensitivity"
+		general_it_stanford_sensitivity:NX_CHAR = "general_it_stanford_sensitivity"
+		general_iref_stanford_sensitivity:NX_CHAR = "general_iref_stanford_sensitivity"
+		general_ascii_output_file_name:NX_CHAR = "general_ascii_output_file_name"
+		general_nexus_output_file:NX_CHAR = "general_nexus_output_file"
+		general_xml_folder_and_files:NX_CHAR = "general_xml_folder_and_files"
+		general_additional_comments:NX_CHAR = "general_additional_comments"
+		general_command:NX_CHAR = "general_command"
+		general_notes:NX_CHAR[] = "general_notes"
+		general_source_file:NX_CHAR = "general_source_file"
+		diamond_time:NX_FLOAT64[] = diamond_time
+		diamond_iref:NX_FLOAT64[] = diamond_iref
+		diamond_lni0it:NX_FLOAT64[] = diamond_lni0it
+		diamond_lnitiref:NX_FLOAT64[] = diamond_lnitiref
