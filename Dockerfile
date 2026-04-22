@@ -1,4 +1,4 @@
-FROM python:3.13.12-trixie@sha256:b90dba245435afbe522568fb3dc93483cdbe54fbccb48516fb03b43b3e73c3bb AS base
+FROM python:3.13.13-trixie@sha256:89a86b28b69c14fa431559849e0cc8139cf17258a0abaaa7d5d98bb2cf20ac1d AS base
 
 WORKDIR /app
 RUN pip install poetry==2.3.2 poetry-plugin-export==1.10.0
@@ -9,7 +9,7 @@ COPY nexuscreator_container/ nexuscreator_container/
 RUN .venv/bin/pip install .
 
 
-FROM python:3.13.12-slim-trixie@sha256:8bc60ca09afaa8ea0d6d1220bde073bacfedd66a4bf8129cbdc8ef0e16c8a952 AS prod
+FROM python:3.13.13-slim-trixie@sha256:9213d136547f0602c3337ff48291e937f9cc43060b3e123402cf2aaff1a08b75 AS prod
 
 ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
@@ -26,6 +26,6 @@ FROM base AS dev
 ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
 RUN poetry install --with=dev
-COPY .flake8 .safety-policy.yml ./
+COPY .flake8 ./
 
 CMD ["pytest", "tests", "--cov=nexuscreator_container", "--cov-report=term-missing", "--cov-report=xml"]
