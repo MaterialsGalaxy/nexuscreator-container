@@ -10,6 +10,9 @@ services:
       - type: bind
         source: ./nexuscreator_container
         target: /app/nexuscreator_container
+      - type: bind
+        source: ./tests
+        target: /app/tests
     command: black nexuscreator_container tests
 
   lint:
@@ -21,6 +24,9 @@ services:
       - type: bind
         source: ./nexuscreator_container
         target: /app/nexuscreator_container
+      - type: bind
+        source: ./tests
+        target: /app/tests
     command: flake8 nexuscreator_container tests
 
   safety:

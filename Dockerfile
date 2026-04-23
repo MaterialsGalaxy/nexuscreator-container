@@ -27,5 +27,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
 RUN poetry install --with=dev
 COPY .flake8 ./
+COPY resources/ /app/resources/
 
 CMD ["pytest", "tests", "--cov=nexuscreator_container", "--cov-report=term-missing", "--cov-report=xml"]

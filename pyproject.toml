@@ -20,10 +20,10 @@ nxxas_to_xdi = "nexuscreator_container.main:main"
 poetry-plugin-export = ">=1.10"
 
 [tool.poetry.group.dev.dependencies]
-black = "^26.1.0"
+black = "^26.3.1"
 flake8 = "^7.3.0"
 safety = "3.7.0"
-pytest = "^9.0.2"
+pytest = "^9.0.3"
 pytest-cov = "^7.0.0"
 
 [build-system]
