@@ -54,6 +54,7 @@ class XdiModel(BaseModel):
         ),
     )
     extra_columns: list[XdiColumn] = Field(
+        default_factory=list,
         description=(
             "List of data columns beyond the required energy, incoming_beam, and "
             "absorbed_beam."
