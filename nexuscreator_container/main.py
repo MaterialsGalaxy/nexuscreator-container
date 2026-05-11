@@ -29,7 +29,7 @@ def main() -> None:
         "-e", "--extra", type=Path, help="YAML file containing extra fields to apply."
     )
     args = parser.parse_args()
-    mapper = XdiMapper(
+    with XdiMapper.open(
         h5_filepath=args.nxxas, mappings_path=args.mapping, extra_path=args.extra
-    )
-    mapper.write(filepath=args.xdi or args.nxxas.removesuffix(".nxs") + ".xdi")
+    ) as mapper:
+        mapper.write(filepath=args.xdi or args.nxxas.with_suffix(".xdi"))
