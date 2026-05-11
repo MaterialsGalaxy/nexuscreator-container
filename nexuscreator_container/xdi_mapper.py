@@ -1,5 +1,4 @@
 from importlib.metadata import version
-import os
 from pathlib import Path
 from typing import Any
 
@@ -53,12 +52,10 @@ class XdiMapper:
         self.column_count = 0
         self.columns = {}
         self.h5_file = File(name=self.h5_filepath)
-        if os.path.isdir(self.mappings_path):
-            for filename in os.listdir(self.mappings_path):
+        if Path(self.mappings_path).is_dir():
+            for filepath in sorted(Path(self.mappings_path).glob("*.yaml")):
                 try:
-                    self._init_mapping(
-                        self.mappings_path / filename, extra_path=self.extra_path
-                    )
+                    self._init_mapping(filepath, extra_path=self.extra_path)
                     return self
                 except ValueError:
                     pass
