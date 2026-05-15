@@ -1,5 +1,4 @@
 from importlib.metadata import version
-import os
 from pathlib import Path
 from typing import Any
 
@@ -31,22 +30,44 @@ class XdiMapper:
             ValueError:
                 If `mappings_path` does not define a valid mapping for `h5_filepath`.
         """
-        self.h5_file = File(name=h5_filepath)
-        self.xdi_file = None
+        self.h5_filepath = h5_filepath
+        self.mappings_path = mappings_path
+        self.extra_path = extra_path
         self.version = version("nexuscreator_container")
+
+    @classmethod
+    def open(
+        cls,
+        h5_filepath: Path,
+        mappings_path: Path,
+        extra_path: Path | None,
+    ) -> "XdiMapper":
+        return cls(
+            h5_filepath=h5_filepath,
+            mappings_path=mappings_path,
+            extra_path=extra_path,
+        )
+
+    def __enter__(self) -> "XdiMapper":
         self.column_count = 0
         self.columns = {}
-        if os.path.isdir(mappings_path):
-            for filename in os.listdir(mappings_path):
+        self.h5_file = File(name=self.h5_filepath)
+        if Path(self.mappings_path).is_dir():
+            for filepath in sorted(Path(self.mappings_path).glob("*.yaml")):
                 try:
-                    self._init_mapping(mappings_path / filename, extra_path=extra_path)
-                    return
+                    self._init_mapping(filepath, extra_path=self.extra_path)
+                    return self
                 except ValueError:
                     pass
-            msg = f"No mappings in {mappings_path} are valid for provided data."
+            self.h5_file.close()
+            msg = f"No mappings in {self.mappings_path} are valid for provided data."
             raise ValueError(msg)
         else:
-            self._init_mapping(filepath=mappings_path, extra_path=extra_path)
+            self._init_mapping(filepath=self.mappings_path, extra_path=self.extra_path)
+        return self
+
+    def __exit__(self, *_) -> None:
+        self.h5_file.close()
 
     def _init_mapping(self, filepath: Path, extra_path: Path | None) -> None:
         """
@@ -198,5 +219,3 @@ class XdiMapper:
             self.xdi_file.write(f"# {' '.join(self.columns.keys())}\n")
             for row in zip(*self.columns.values(), strict=True):
                 self.xdi_file.write(f"  {' '.join([str(v) for v in row])}\n")
-
-        self.h5_file.close()
