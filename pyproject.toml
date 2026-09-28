@@ -1,6 +1,6 @@
 [project]
 name = "nexuscreator-container"
-version = "0.1.0"
+version = "2.0.2"
 description = ""
 authors = [
     {name = "Patrick Austin",email = "patrick.austin@stfc.ac.uk"}
@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "nexuscreator @ git+https://codebase.helmholtz.cloud/hzb/research_data_management/nexuscreator.git@c480dbfb8d892f08feef1494a77f0a92ff2dea60",
+    "nexuscreator (>=2.0.2,<3.0.0)",
     "h5py (>=3.16.0,<4.0.0)",
     "pydantic (>=2.13.3,<3.0.0)"
 ]
