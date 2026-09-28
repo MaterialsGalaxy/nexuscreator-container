@@ -1,4 +1,5 @@
-FROM python:3.13.13-trixie@sha256:89a86b28b69c14fa431559849e0cc8139cf17258a0abaaa7d5d98bb2cf20ac1d AS base
+# Seemingly cannot use slim as it doesn't find a compiler for numpy's c code
+FROM python:3.14.7-trixie@sha256:0876e54cf728d89fd9d0fdaf5837b9ee879ea5fbbd6fd0cddbe5eb0cce3f5f9e AS base
 
 WORKDIR /app
 RUN pip install poetry==2.3.2 poetry-plugin-export==1.10.0
@@ -9,7 +10,7 @@ COPY nexuscreator_container/ nexuscreator_container/
 RUN .venv/bin/pip install .
 
 
-FROM python:3.13.13-slim-trixie@sha256:9213d136547f0602c3337ff48291e937f9cc43060b3e123402cf2aaff1a08b75 AS prod
+FROM python:3.14.7-slim-trixie@sha256:51dafde81dbdb6ebde285137a295cf18a47ca95234fe388a343719cb97305b3d AS prod
 
 ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
